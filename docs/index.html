@@ -9,77 +9,49 @@
     body {
       font-family: Arial, sans-serif;
       background: #dbe9ff;
-      padding: 40px 20px;
+      padding: 20px;
     }
-
     .box {
       max-width: 400px;
       margin: auto;
       background: white;
-      padding: 30px 20px;
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
-    .box img {
-      width: 120px;
-      display: block;
-      margin: 0 auto 20px;
-      border-radius: 12px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 12px;
-    }
-
     input, button {
       width: 100%;
-      padding: 12px;
-      margin-top: 6px;
-      border-radius: 8px;
+      padding: 10px;
+      margin-top:50px auto;
+      border-radius: 9px;
       border: 1px solid #ccc;
-      box-sizing: border-box;
     }
-
     button {
       background-color: #001bff;
       color: white;
       font-weight: bold;
-      margin-top: 20px;
     }
-
     canvas {
       display: block;
-      margin: 25px auto 0;
+      margin: 20px auto 0;
     }
   </style>
 </head>
 <body>
-
   <div class="box">
-    <!-- Logo -->
-    <img src="logo.png" alt="Naha Departmental Store Logo">
-
-    <h2>🔷 NAHA Dynamic UPI QR Generator</h2>
-
+    <h2 style="text-align:center;">🔷 NAHA Dynamic UPI QR Generator</h2>
+    
     <label>UPI ID:</label>
     <input type="text" id="upi" value="EnterUpi_Id@">
+    
 
     <label>Store Name:</label>
     <input type="text" id="store" value="Naha Departmental Store">
-
+    
     <label>Fixed Amount (₹):</label>
     <input type="number" id="amount" value="00">
-
+    
     <button onclick="generate()">Generate QR Code</button>
-
     <canvas id="qr"></canvas>
   </div>
 
@@ -100,13 +72,19 @@
         return;
       }
 
+      // Correct UPI format
       const uri = `upi://pay?pa=${upi}&pn=${encodeURIComponent(store)}&am=${amount}&cu=INR`;
-      qr.set({ value: uri });
+
+      qr.set({
+        value: uri
+      });
 
       console.log("Generated UPI Link: ", uri);
+      <img src="n-logo.png" alt="Naha Logo" style="width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px;">
+
     }
   </script>
-
 </body>
 </html>
+
 
