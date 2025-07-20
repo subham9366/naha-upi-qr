@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NAHA UPI QR Code Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #dbe9ff;
+      padding: 20px;
+    }
+    .box {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top:50px auto;
+      border-radius: 9px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #001bff;
+      color: white;
+      font-weight: bold;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2 style="text-align:center;">🔷 NAHA Dynamic UPI QR Generator</h2>
+    
+    <label>UPI ID:</label>
+    <input type="text" id="upi" value="EnterUpi_Id@">
+    
+
+    <label>Store Name:</label>
+    <input type="text" id="store" value="Naha Departmental Store">
+    
+    <label>Fixed Amount (₹):</label>
+    <input type="number" id="amount" value="00">
+    
+    <button onclick="generate()">Generate QR Code</button>
+    <canvas id="qr"></canvas>
+  </div>
+
+  <script>
+    const qr = new QRious({
+      element: document.getElementById('qr'),
+      size: 250,
+      value: ""
+    });
+
+    function generate() {
+      const upi = document.getElementById("upi").value.trim();
+      const store = document.getElementById("store").value.trim();
+      const amount = document.getElementById("amount").value.trim();
+
+      if (!upi || !amount) {
+        alert("Please enter UPI ID and amount.");
+        return;
+      }
+
+      // Correct UPI format
+      const uri = `upi://pay?pa=${upi}&pn=${encodeURIComponent(store)}&am=${amount}&cu=INR`;
+
+      qr.set({
+        value: uri
+      });
+
+      console.log("Generated UPI Link: ", uri);
+    }
+  </script>
+</body>
+</html>
